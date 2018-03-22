@@ -45,6 +45,7 @@ import common.utils.DataUtils;
 import common.utils.DensityUtils;
 import common.utils.ScreenUtils;
 import common.utils.T;
+import pl.droidsonroids.gif.GifImageView;
 
 
 /**
@@ -310,8 +311,10 @@ public class BaseHomeFragment
                     final RecyclerView.ViewHolder childViewHolder = childRecyclerView.findViewHolderForAdapterPosition(0);
                     SimpleDraweeView iv_image = childViewHolder.itemView.findViewById(R.id.iv_image);
                     View ivPlayGif = childViewHolder.itemView.findViewById(R.id.iv_playGif);
+                    GifImageView gifImageView = childViewHolder.itemView.findViewById(R.id.gifImageView);
+
                     float visiblePercent = BizUtils.getVisiblePercent(iv_image);
-                    gifWrapDataList.add(new GifWrapData(visiblePercent, iv_image, ivPlayGif, model.getPictureDetails().get(0)));
+                    gifWrapDataList.add(new GifWrapData(visiblePercent, iv_image, ivPlayGif, model.getPictureDetails().get(0),gifImageView));
                 }
             }
 
@@ -326,7 +329,7 @@ public class BaseHomeFragment
                     jokePhotoUtils = new JokePhotoUtils();
                 }
                 gifWrapDatal4visiblePercent = gifWrapDataList.get(0);
-                jokePhotoUtils.showGif(getContext(), gifWrapDatal4visiblePercent.getIv_image(), gifWrapDatal4visiblePercent.getIvPlayGif(), gifWrapDatal4visiblePercent.getPictureDetail());
+                jokePhotoUtils.showGif(getContext(), gifWrapDatal4visiblePercent.getIv_image(), gifWrapDatal4visiblePercent.getIvPlayGif(), gifWrapDatal4visiblePercent.getPictureDetail(),gifWrapDatal4visiblePercent.getGifImageView());
                 return;
             }
 
@@ -342,7 +345,7 @@ public class BaseHomeFragment
             if (jokePhotoUtils == null) {
                 jokePhotoUtils = new JokePhotoUtils();
             }
-            jokePhotoUtils.showGif(getContext(), gifWrapDatal4visiblePercent.getIv_image(), gifWrapDatal4visiblePercent.getIvPlayGif(), gifWrapDatal4visiblePercent.getPictureDetail());
+            jokePhotoUtils.showGif(getContext(), gifWrapDatal4visiblePercent.getIv_image(), gifWrapDatal4visiblePercent.getIvPlayGif(), gifWrapDatal4visiblePercent.getPictureDetail(),gifWrapDatal4visiblePercent.getGifImageView());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -359,11 +362,12 @@ public class BaseHomeFragment
         RecyclerView childRecyclerView = viewHolder.itemView.findViewById(R.id.rv_image);
         final RecyclerView.ViewHolder childViewHolder = childRecyclerView.findViewHolderForAdapterPosition(0);
         SimpleDraweeView iv_image = childViewHolder.itemView.findViewById(R.id.iv_image);
+        GifImageView gifImageView = childViewHolder.itemView.findViewById(R.id.gifImageView);
         View ivPlayGif = childViewHolder.itemView.findViewById(R.id.iv_playGif);
         if (jokePhotoUtils == null) {
             jokePhotoUtils = new JokePhotoUtils();
         }
-        jokePhotoUtils.showGif(getContext(), iv_image, ivPlayGif, getAllDataList().get(position).getPictureDetails().get(0));
+        jokePhotoUtils.showGif(getContext(), iv_image, ivPlayGif, getAllDataList().get(position).getPictureDetails().get(0),gifImageView);
     }
 
 

@@ -13,6 +13,10 @@
         android:layout_gravity="center_horizontal"
         />
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"/>
 
 
     <ImageView

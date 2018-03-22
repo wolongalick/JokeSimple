@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.facebook.binaryresource.FileBinaryResource;
+import com.facebook.cache.common.SimpleCacheKey;
 import com.facebook.common.util.UriUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
@@ -16,7 +18,11 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.yyhd.joke.bean.PictureDetail;
 
+import java.io.IOException;
+
 import common.utils.BLog;
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 
 /**
  * 功能:
@@ -25,12 +31,12 @@ import common.utils.BLog;
  * 备注:
  */
 public class JokePhotoUtils {
-    private final String TAG="JokePhotoUtils";
+    private final String TAG = "JokePhotoUtils";
     private SimpleDraweeView lastIvImage;
     private PictureDetail lastPictureDetail;
     private View lastIvPlayGif;
 
-    public void showGif(final Context context, final SimpleDraweeView ivImage, final View ivPlayGif, final PictureDetail pictureDetail) {
+    public void showGif(final Context context, final SimpleDraweeView ivImage, final View ivPlayGif, final PictureDetail pictureDetail, final GifImageView gifImageView) {
         if (lastIvImage == ivImage) {
             return;
         }
@@ -101,6 +107,18 @@ public class JokePhotoUtils {
 
                 pictureDetail.setLoad_status(BizContant.LoadStatus.LOAD_SUCCES);
                 ivPlayGif.setVisibility(View.GONE);
+
+                FileBinaryResource resource = (FileBinaryResource) Fresco.getImagePipelineFactory().getMainFileCache().getResource(new SimpleCacheKey(pictureDetail.getQiniuUrl()));
+                if (resource != null && resource.getFile() != null && resource.getFile().exists()) {
+                    ivImage.setVisibility(View.GONE);
+                    gifImageView.setVisibility(View.VISIBLE);
+                    try {
+                        GifDrawable gifDrawable=new GifDrawable(resource.getFile());
+                        gifImageView.setImageDrawable(gifDrawable);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             @Override
@@ -115,7 +133,7 @@ public class JokePhotoUtils {
                 ivImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        reloadGif(ivImage,pictureDetail, ivPlayGif);
+                        reloadGif(ivImage, pictureDetail, ivPlayGif);
                     }
                 });
 
@@ -129,7 +147,7 @@ public class JokePhotoUtils {
                 .setOldController(ivImage.getController())
                 .setLowResImageRequest(ImageRequest.fromUri(Uri.parse(pictureDetail.getFirstFrame())))
                 .setUri(UriUtil.parseUriOrNull(qiniuUrl4Webp))
-                .setAutoPlayAnimations(true)
+                .setAutoPlayAnimations(false)
                 .build();
         ivImage.setController(controller);
 
@@ -139,15 +157,15 @@ public class JokePhotoUtils {
     }
 
 
-    public void stopGif(Context context){
-        if(lastIvImage!=null && lastPictureDetail!=null){
-            showFirstFrame(context,lastIvImage,lastPictureDetail);
-            lastIvImage=null;
-            lastPictureDetail=null;
+    public void stopGif(Context context) {
+        if (lastIvImage != null && lastPictureDetail != null) {
+            showFirstFrame(context, lastIvImage, lastPictureDetail);
+            lastIvImage = null;
+            lastPictureDetail = null;
         }
         if (lastIvPlayGif != null) {
             lastIvPlayGif.setVisibility(View.VISIBLE);
-            lastIvPlayGif=null;
+            lastIvPlayGif = null;
         }
     }
 
@@ -227,7 +245,7 @@ public class JokePhotoUtils {
 
     }
 
-    private void reloadGif(SimpleDraweeView ivImage,PictureDetail pictureDetail,View ivPlayGif){
+    private void reloadGif(SimpleDraweeView ivImage, PictureDetail pictureDetail, View ivPlayGif) {
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setOldController(ivImage.getController())

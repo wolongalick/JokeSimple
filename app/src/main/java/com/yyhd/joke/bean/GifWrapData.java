@@ -4,6 +4,8 @@ import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import pl.droidsonroids.gif.GifImageView;
+
 /**
  * 功能:
  * 作者: 崔兴旺
@@ -13,15 +15,17 @@ import com.facebook.drawee.view.SimpleDraweeView;
 public class GifWrapData {
     private float visiblePercent;
     private SimpleDraweeView iv_image;
+    private GifImageView gifImageView;
     private View ivPlayGif;
     private PictureDetail pictureDetail;
 
 
-    public GifWrapData(float visiblePercent, SimpleDraweeView iv_image, View ivPlayGif, PictureDetail pictureDetail) {
+    public GifWrapData(float visiblePercent, SimpleDraweeView iv_image, View ivPlayGif, PictureDetail pictureDetail,GifImageView gifImageView) {
         this.visiblePercent = visiblePercent;
         this.iv_image = iv_image;
         this.ivPlayGif = ivPlayGif;
         this.pictureDetail = pictureDetail;
+        this.gifImageView = gifImageView;
     }
 
     public float getVisiblePercent() {
@@ -56,4 +60,11 @@ public class GifWrapData {
         this.pictureDetail = pictureDetail;
     }
 
+    public GifImageView getGifImageView() {
+        return gifImageView;
+    }
+
+    public void setGifImageView(GifImageView gifImageView) {
+        this.gifImageView = gifImageView;
+    }
 }
