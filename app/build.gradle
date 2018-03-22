@@ -1,0 +1,230 @@
+import org.aspectj.bridge.IMessage
+import org.aspectj.bridge.MessageHandler
+import org.aspectj.tools.ajc.Main
+
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'     // apply plugin
+apply plugin: 'walle'                       //添加瓦力打包插件
+//apply plugin: 'android-aspectjx'            //AOP插件
+
+def keystorePropertiesFile=rootProject.file("keystore.properties")
+def keystoreProperties=new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+
+
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("GMT+8"))
+}
+
+static def getVersionCode(boolean isRelease){
+    if(isRelease){
+        return 110                    //正式版版本号
+    }else {
+        return 158                    //测试版版本号
+    }
+}
+
+static def getVersionName(boolean isRelease){
+    if(isRelease){
+        return "1.3.3"              //正式版名称
+    }else {
+        return "1.3.3_0312_01"      //测试版名称
+    }
+}
+
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.yyhd"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        versionCode getVersionCode(false)
+        versionName getVersionName(false)
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        configurations.all {
+            resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".joke.simple.beta"
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+
+            manifestPlaceholders = [
+                    UMENG_APPKEY : "59aa392299f0c716a70007e2",
+                    QQ_APPID     : "1106373366",
+                    JPUSH_PKGNAME: "com.yyhd.joke.beta",
+                    JPUSH_APPKEY : "bfb1fcfcb536a42894d13ad5", //JPush上注册的包名对应的appkey.
+                    JPUSH_CHANNEL: "Joke_beta", //暂时填写默认值即可.
+                    GETUI_APP_ID : "uHS2g3WYSa9DQ1Wq59Hrs4",
+                    GETUI_APP_KEY : "sTAPGQhoQD8CVcWfRvCFk",
+                    GETUI_APP_SECRET : "X8pWVryG0YAaWG2YSpOdY3",
+                    XG_ACCESS_ID:"2100270224",
+                    XG_ACCESS_KEY : "A1W4ZC3U12QR",
+            ]
+            resValue "string", "app_name_", "扯淡联盟beta"
+            buildConfigField "String", "BASE_URL", "\"http://39.106.179.87:8080/\""
+            buildConfigField "String", "BASE_LOG_URL", "\"http://39.106.179.87:4001/\""
+            buildConfigField "String", "H5_URL", "\"http://39.106.179.87:3001/\""
+            buildConfigField "String", "BASE_LVPI_URL","\"http://39.106.179.87:9090/\""
+            buildConfigField "String", "WEI_XIN_APPID", "\"wx6604fc23db4650bf\""
+            buildConfigField "String", "WEI_XIN_APPSECRET", "\"50e6607f2ca8152184f4bb8476bd35b1\""
+            buildConfigField "String", "QQ_APPID", "\"1106373366\""
+            buildConfigField "String", "QQ_APPKEY", "\"fBLtPyb35qJ5LG1G\""
+            buildConfigField "String", "WEI_BO_APPID", "\"3402094625\""
+            buildConfigField "String", "WEI_BO_APPSECRET", "\"d551f7dd9bbc79fa240fb58de49a8bb0\""
+            buildConfigField "String", "MI_PUSH_APPID", "\"2882303761517669089\""
+            buildConfigField "String", "MI_PUSH_APPKEY", "\"5421766932089\""
+            buildConfigField "String", "MEIZU_PUSH_APPID", "\"111686\""
+            buildConfigField "String", "MEIZU_PUSH_APPKEY", "\"d00595c68d5644998255289af0000565\""
+            buildConfigField "String", "UMENG_MESSAGE_SECRET", "\"ab9cbb3597836b237931d921d6489750\""
+            buildConfigField "boolean", "IS_PUSH_DEBUG","true"
+        }
+        //正式环境
+        release {
+            applicationIdSuffix ".joke.simple"
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+
+            manifestPlaceholders = [
+                    UMENG_APPKEY : "59892bbf8630f5039900041b",
+                    QQ_APPID     : "1106373366",
+                    JPUSH_PKGNAME: "com.yyhd.joke",
+                    JPUSH_APPKEY : "44af89d4c0355fd60fba6aed", //JPush上注册的包名对应的appkey.
+                    JPUSH_CHANNEL: "Joke", //暂时填写默认值即可.
+                    GETUI_APP_ID : "GLuJNBKmTE6FJHfnQ2Scs8",
+                    GETUI_APP_KEY : "2sLwfGy09F6cltoE6OPTZ9",
+                    GETUI_APP_SECRET : "nkM7xEnPJV99SNzaYHIG93",
+                    XG_ACCESS_ID:"2100270223",
+                    XG_ACCESS_KEY : "A85ME37S7NGZ",
+            ]
+            resValue "string", "app_name_", "扯淡联盟"
+            buildConfigField "String", "BASE_URL", "\"http://yyuehd.com/\""
+            buildConfigField "String", "BASE_LOG_URL", "\"http://101.200.48.177:4001/\""
+            buildConfigField "String", "H5_URL", "\"http://m.yyuehd.com/\""
+            buildConfigField "String", "BASE_LVPI_URL","\"http://lvpi.yyuehd.com/\""
+            buildConfigField "String", "WEI_XIN_APPID", "\"wxa086573a80aeb006\""
+            buildConfigField "String", "WEI_XIN_APPSECRET", "\"5eca96e77e464c2c73194120135a6198\""
+            buildConfigField "String", "QQ_APPID", "\"1106373366\""
+            buildConfigField "String", "QQ_APPKEY", "\"fBLtPyb35qJ5LG1G\""
+            buildConfigField "String", "WEI_BO_APPID", "\"3402094625\""
+            buildConfigField "String", "WEI_BO_APPSECRET", "\"d551f7dd9bbc79fa240fb58de49a8bb0\""
+            buildConfigField "String", "MI_PUSH_APPID", "\"2882303761517632328\""
+            buildConfigField "String", "MI_PUSH_APPKEY", "\"5441763298328\""
+            buildConfigField "String", "MEIZU_PUSH_APPID", "\"111685\""
+            buildConfigField "String", "MEIZU_PUSH_APPKEY", "\"67fdf2de9a29426993b5c44d7923817c\""
+            buildConfigField "String", "UMENG_MESSAGE_SECRET", "\"866da990d88b1bd423506eca3ddcf713\""
+            buildConfigField "boolean", "IS_PUSH_DEBUG","false"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation project(':commonLibrary')
+
+    /*greenDao配置*/
+    // add library
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.yyhd.joke.greendao.dao'
+        targetGenDir 'src/main/java-gen'
+    }
+    compile 'com.github.hackware1993:MagicIndicator:1.5.0'
+    compile 'org.greenrobot:greendao:3.2.2'
+    /*butterknife-begin*/
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    /*butterknife-end*/
+    compile 'com.facebook.fresco:fresco:1.8.0'
+    compile 'com.facebook.fresco:animated-base-support:1.3.0'
+    compile 'com.facebook.fresco:animated-gif:1.8.0'
+    compile 'com.facebook.fresco:animated-webp:1.8.0'
+    compile 'com.facebook.fresco:webpsupport:1.8.0'
+    compile 'com.facebook.fresco:imagepipeline-okhttp3:1.8.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    compile 'net.jcip:jcip-annotations:1.0'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.11'
+}
+
+final def log = project.logger
+final def variants = project.android.applicationVariants
+
+
+variants.all { variant ->
+    /*if (!variant.buildType.isDebuggable()) {
+        log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
+        return
+    }*/
+
+    if (variant.buildType.name.equals('release')) {
+        variant.mergedFlavor.versionCode = getVersionCode(true)
+        variant.mergedFlavor.versionName = getVersionName(true)
+    } else {
+        variant.mergedFlavor.versionCode = getVersionCode(false)
+        variant.mergedFlavor.versionName = getVersionName(false)
+    }
+
+    JavaCompile javaCompile = variant.javaCompile
+    javaCompile.doLast {
+        String[] args = ["-showWeaveInfo",
+                         "-1.5",
+                         "-inpath", javaCompile.destinationDir.toString(),
+                         "-aspectpath", javaCompile.classpath.asPath,
+                         "-d", javaCompile.destinationDir.toString(),
+                         "-classpath", javaCompile.classpath.asPath,
+                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
+        log.debug "ajc args: " + Arrays.toString(args)
+
+        MessageHandler handler = new MessageHandler(true)
+        new Main().run(args, handler)
+        for (IMessage message : handler.getMessages(null, true)) {
+            switch (message.getKind()) {
+                case IMessage.ABORT:
+                case IMessage.ERROR:
+                case IMessage.FAIL:
+                    log.error message.message, message.thrown
+                    break
+                case IMessage.WARNING:
+                    log.warn message.message, message.thrown
+                    break
+                case IMessage.INFO:
+                    log.info message.message, message.thrown
+                    break
+                case IMessage.DEBUG:
+                    log.debug message.message, message.thrown
+                    break
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <include layout="@layout/layout_common_item_joke_author"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/text_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:lineSpacingExtra="9dp"
+        android:text="测试内容"
+        android:textColor="@color/refreshTextViewColor"
+        android:textSize="@dimen/joke_content"/>
+
+    <include layout="@layout/layout_joke_multi_photo"/>
+
+    <include layout="@layout/layout_god_comment"/>
+
+    <include layout="@layout/layout_praise_trample_comment"/>
+
+    <include layout="@layout/layout_last_watch"/>
+</LinearLayout>

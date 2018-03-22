@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_item_joke_author"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_commenterAvatar"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        fresco:placeholderImage="@drawable/place_holder_avatar"
+        fresco:roundAsCircle="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_commenterNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三"
+                android:textColor="@color/black_6b"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_publishTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00-00 00:00"
+                android:textColor="@color/gray_cd"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <!--顶-->
+        <LinearLayout
+            android:id="@+id/ll_digg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/detail_paddingLeftRight"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_digg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/selector_digg_comment" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:minWidth="15dp">
+
+                <TextView
+                    android:id="@+id/tv_digg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="0"
+                    android:textColor="@drawable/selector_text_pink_gray"
+                    android:textSize="@dimen/joke_digg_bury" />
+
+                <TextView
+                    android:id="@+id/tv_digg_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/tv_digg"
+                    android:layout_marginBottom="-5dp"
+                    android:gravity="bottom"
+                    android:text="+1"
+                    android:textColor="@color/main_yellow"
+                    android:textSize="@dimen/joke_digg_bury"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/share_small" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

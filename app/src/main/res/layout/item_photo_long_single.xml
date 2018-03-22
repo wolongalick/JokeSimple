@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/gray_f8"
+        android:transitionName="test" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/shape_watch_long_photo_4_single"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="点击查看长图"
+            android:drawablePadding="7dp"
+            android:drawableRight="@drawable/watch_long_photo"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+    </FrameLayout>
+
+
+</RelativeLayout>

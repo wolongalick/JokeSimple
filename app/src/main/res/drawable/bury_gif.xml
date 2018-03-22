@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="true">
+    <item android:drawable="@drawable/cai_1" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_2" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_3" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_4" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_5" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_6" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_7" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_8" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_9" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_10" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_11" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_12" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_13" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_14" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_15" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_16" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_17" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_18" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_19" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_20" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_21" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_22" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_23" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_24" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_25" android:duration="@integer/vote_frame_duration"/>
+    <item android:drawable="@drawable/cai_26" android:duration="@integer/vote_frame_duration"/>
+</animation-list>

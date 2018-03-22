@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_crop_photo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <common.ui.Topbar
+        style="@style/MW.Topbar"
+        app:topbarTitleText="裁剪"
+        app:topbarRightText="完成"
+        app:topbarRightType="text"
+        app:topbarBg="@color/hei_61"
+        app:statusBarAsTopbarBg="true"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c5">
+
+        <com.isseiaoki.simplecropview.CropImageView
+            android:id="@+id/civ_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scv_animation_duration="200"
+            app:scv_animation_enabled="true"
+            app:scv_crop_enabled="true"
+            app:scv_crop_mode="custom"
+            app:scv_frame_color="@color/white"
+            app:scv_frame_stroke_weight="1dp"
+            app:scv_guide_color="@color/white"
+            app:scv_guide_show_mode="not_show"
+            app:scv_guide_stroke_weight="1dp"
+            app:scv_handle_color="@color/main_yellow"
+            app:scv_handle_shadow_enabled="true"
+            app:scv_handle_show_mode="show_always"
+            app:scv_handle_size="10dp"
+            app:scv_initial_frame_scale="1"
+            app:scv_min_frame_size="80dp"
+            app:scv_touch_padding="8dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

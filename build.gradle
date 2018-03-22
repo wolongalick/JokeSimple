@@ -1,0 +1,57 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    compileSdkVersion = 27
+    buildToolsVersion = "27.0.1"
+    minSdkVersion = 17
+    targetSdkVersion = 25
+}
+
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
+        classpath 'com.meituan.android.walle:plugin:1.1.5'      //美团打包工具
+        classpath 'com.novoda:bintray-release:0.5.0'
+//        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:1.0.8'
+        classpath 'org.aspectj:aspectjtools:1.8.9'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'  //给引导库NewbieGuide使用的
+
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://maven.google.com"}
+        maven { url "https://jitpack.io" }
+        maven { url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        flatDir {
+            def needUseAARProjects = [":app", ":commonLibrary"]
+            for (String name : needUseAARProjects) {
+                dirs project(name).file("libs")
+            }
+        }
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

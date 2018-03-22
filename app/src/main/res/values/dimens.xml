@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="joke_author">14sp</dimen>
+    <dimen name="joke_title">16sp</dimen>
+    <dimen name="joke_content">16sp</dimen>
+    <dimen name="joke_digg_bury">14sp</dimen>
+    <dimen name="joke_indicator">6sp</dimen>
+
+    <dimen name="home_paddingLeftRight">16dp</dimen>    //首页图片距离屏幕两边的距离
+    <dimen name="home_photo_paddingTop">8dp</dimen>     //首页图片距离上边文字的距离
+    <dimen name="home_spacing">8dp</dimen>              //首页多图模式下,每个图片之间的上下左右间距
+    <dimen name="home_photo_radius">4dp</dimen>         //首页图片的圆角角度
+    <dimen name="home_divider_height">12dp</dimen>      //首页列表分割线高度
+
+
+    <dimen name="invite_QR_size">120dp</dimen>
+
+    <dimen name="home_space">10dp</dimen>               //首页两边间距
+    <dimen name="select_photo_space">3dp</dimen>        //发表评论时,选择图片界面中,图与图之间的间距
+    <dimen name="pre_publish_photo_space">3dp</dimen>   //段子详情界面中,待发布的图片,图与图之间的间距
+    <dimen name="my_comment_photo_space">2dp</dimen>   //我的评论界面,已发布的图片,图与图之间的间距
+
+
+    <dimen name="comment_statusbar_hegiht">44dp</dimen>
+
+    <dimen name="prepublish_photo_size">40dp</dimen>        //待发布的图片(详情界面软键盘上方九宫格的图片)尺寸
+    <dimen name="published_comment_photo_space">6dp</dimen>   //已发布的评论图片之间的间距
+    <dimen name="detail_paddingLeftRight">15dp</dimen>      //已发布的评论距离屏幕两侧的间距
+
+    <dimen name="login_paddingLeftRight">37dp</dimen>   //登录界面,两边间距
+
+    <dimen name="convert_space">11dp</dimen>
+    <dimen name="award_size">120dp</dimen>              //金币奖励toast的宽高尺寸
+
+</resources>

@@ -1,0 +1,17 @@
+package com.yyhd.joke.module.home.view.fragment;
+
+import com.yyhd.joke.bean.DataAllBean;
+import com.yyhd.joke.module.home.view.adapter.MultiPhotoAdapter;
+import com.yyhd.joke.module.home.view.adapter.holder.MultiPhotoViewHolder;
+
+/**
+ * 功能:
+ * 作者: 崔兴旺
+ * 日期: 2017/8/4
+ * 备注:
+ */
+public class MulticPhotoHomeFragment<Model extends DataAllBean
+        , Holder extends MultiPhotoViewHolder
+        , Adapter extends MultiPhotoAdapter<Model, Holder>> extends BaseHomeFragment<Model,Holder,Adapter> {
+
+}

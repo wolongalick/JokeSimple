@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rv_image"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/home_photo_paddingTop"
+    android:paddingLeft="@dimen/home_paddingLeftRight"
+    android:paddingRight="@dimen/home_paddingLeftRight"
+    />
